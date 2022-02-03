@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/src/widget/add_cart.dart';
 import 'package:shoes/src/widget/custom_appbar.dart';
 import 'package:shoes/src/widget/custom_widget.dart';
 import 'package:shoes/src/widget/shoes_size_preview.dart';
@@ -19,7 +20,9 @@ class ShoePage extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  ShoeSizePreview(),
+                  ShoeSizePreview(
+                    fullScreen: true,
+                  ),
                   ShoeDescription(
                       title: 'Nike Air Max 720',
                       desciption:
@@ -28,7 +31,7 @@ class ShoePage extends StatelessWidget {
               ),
             ),
           ),
-          AddChartButton(quantity: 180)
+          AddCartButton(quantity: 180)
         ],
       ),
     );
