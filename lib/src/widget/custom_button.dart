@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
-  CustomButton(this.text);
+  final double alto;
+  final double ancho;
+  final Color color;
+  CustomButton(this.text,
+      {required this.alto, required this.ancho, required this.color});
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
-      height: 50,
+      width: ancho,
+      height: alto,
       decoration: BoxDecoration(
-        color: Colors.orange,
+        color: color,
         borderRadius: BorderRadius.circular(100),
       ),
       child: Center(

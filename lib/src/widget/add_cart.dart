@@ -24,7 +24,12 @@ class AddCartButton extends StatelessWidget {
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             Spacer(),
-            CustomButton("ADD TO CART"),
+            CustomButton(
+              "ADD TO CART",
+              alto: 120,
+              ancho: 40,
+              color: Colors.orange,
+            ),
             SizedBox(
               width: 20,
             ),

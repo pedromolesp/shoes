@@ -11,7 +11,7 @@ class ShoeSizePreview extends StatelessWidget {
           vertical: this.fullScreen ? 5 : 0),
       child: Container(
         width: double.infinity,
-        height: this.fullScreen ? 400 : 430,
+        height: this.fullScreen ? 380 : 410,
         decoration: BoxDecoration(
           borderRadius: (!this.fullScreen)
               ? BorderRadius.circular(50)
@@ -23,11 +23,16 @@ class ShoeSizePreview extends StatelessWidget {
                 ),
           color: Color(0xffFFcF53),
         ),
-        child: Column(
+        child: Stack(
+          alignment: Alignment.center,
           children: [
             //zapato con sombra
             _ShadowShoe(),
-            if (this.fullScreen) _SizeShoe()
+            if (this.fullScreen)
+              Positioned(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  bottom: 20,
+                  child: Center(child: _SizeShoe()))
             //TODO: tallas
           ],
         ),
@@ -39,14 +44,16 @@ class ShoeSizePreview extends StatelessWidget {
 class _ShadowShoe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(bottom: 20, right: 50, child: _Shadow()),
-        Padding(
-          padding: EdgeInsets.all(50.0),
-          child: Image(image: AssetImage("assets/imgs/azul.png")),
-        ),
-      ],
+    return Container(
+      child: Stack(
+        children: [
+          Positioned(bottom: 30, right: 50, child: _Shadow()),
+          Padding(
+            padding: EdgeInsets.all(50.0),
+            child: Image(image: AssetImage("assets/imgs/azul.png")),
+          ),
+        ],
+      ),
     );
   }
 }
