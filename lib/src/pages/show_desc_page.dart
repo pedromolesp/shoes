@@ -1,19 +1,29 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes/helpers/helpers.dart';
+import 'package:shoes/models/show_model.dart';
 import 'package:shoes/src/widget/custom_widget.dart';
 
 class ShowDescPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    camnbiarStatusLight();
+
     return Scaffold(
         body: Column(
       children: [
         Stack(
           children: [
-            ShoeSizePreview(fullScreen: true),
+            Hero(tag: "showpreview", child: ShoeSizePreview(fullScreen: true)),
             Positioned(
               top: 80,
               child: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  camnbiarStatusDark();
+
+                  Navigator.pop(context);
+                },
                 child: Icon(
                   Icons.chevron_left,
                   color: Colors.white,
@@ -125,22 +135,30 @@ class _ColoresAndMore extends StatelessWidget {
               Positioned(
                 left: 90,
                 child: _ButtonColor(
+                  4,
+                  "assets/imgs/verde.png",
                   color: Color(0xffC6D642),
                 ),
               ),
               Positioned(
                 left: 60,
                 child: _ButtonColor(
+                  3,
+                  "assets/imgs/amarillo.png",
                   color: Color(0xffFFAD29),
                 ),
               ),
               Positioned(
                 left: 30,
                 child: _ButtonColor(
+                  2,
+                  "assets/imgs/azul.png",
                   color: Color(0xff2099F1),
                 ),
               ),
               _ButtonColor(
+                1,
+                "assets/imgs/negro.png",
                 color: Color(0xff364D56),
               ),
             ],
@@ -159,14 +177,25 @@ class _ColoresAndMore extends StatelessWidget {
 
 class _ButtonColor extends StatelessWidget {
   final Color color;
-
-  _ButtonColor({required this.color});
+  final int index;
+  final String urlImage;
+  _ButtonColor(this.index, this.urlImage, {required this.color});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 45,
-      height: 45,
-      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+    return GestureDetector(
+      onTap: () {
+        final showModel = Provider.of<ShoeModel>(context, listen: false);
+        showModel.assetImage = this.urlImage;
+      },
+      child: FadeInLeft(
+        duration: Duration(milliseconds: 300),
+        delay: Duration(milliseconds: index * 200),
+        child: Container(
+          width: 45,
+          height: 45,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
+      ),
     );
   }
 }
@@ -189,11 +218,15 @@ class _CostAndBuynow extends StatelessWidget {
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
           Spacer(),
-          CustomButton(
-            "Buy now",
-            ancho: 120,
-            alto: 40,
-            color: Colors.orange,
+          Bounce(
+            delay: Duration(seconds: 1),
+            from: 8,
+            child: CustomButton(
+              "Buy now",
+              alto: 40,
+              ancho: 120,
+              color: Colors.orange,
+            ),
           )
         ],
       ),
